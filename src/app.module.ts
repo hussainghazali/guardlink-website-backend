@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AccidentsModule } from './accidents/accidents.module';
+import { ContactModule } from './accidents/contact.module';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from './logger/logger.module';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
@@ -33,7 +33,7 @@ import { SuccessFilter } from './logger/error/200';
     ConfigModule.forRoot({
       isGlobal: true, // no need to import into other modules
     }),
-    AccidentsModule,
+    ContactModule,
     LoggerModule,
   ],
   controllers: [AppController],

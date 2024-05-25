@@ -9,19 +9,25 @@ import {
   OneToOne,
 } from 'typeorm';
 
-@Entity('accidents')
-export class Accident {
+@Entity('contacts')
+export class Contact {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  date: string;
+  name: string;
 
   @Column()
-  location: string;
+  phoneNumber: string;
 
   @Column('text')
-  details: string;
+  city: string;
+
+  @Column()
+  services: string;
+
+  @Column()
+  notes: string;
 
   @CreateDateColumn()
   createdAt: Date;

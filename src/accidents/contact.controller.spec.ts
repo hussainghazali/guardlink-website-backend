@@ -1,20 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AccidentController } from './accidents.controller';
-import { AccidentsService } from './accidents.service';
-import { RegisterAccidentDto } from './dto/register-accident.dto';
+import { RegisterContactDto } from './dto/contact-register.dto';
 import { LoggerService } from 'src/logger/logger.service';
+import { ContactService } from './contact.service';
+import { ContactController } from './contact.controller';
 
 describe('AccidentController', () => {
-  let controller: AccidentController;
-  let accidentsService: AccidentsService;
+  let controller: ContactController;
+  let contactService: ContactService;
   let loggerService: LoggerService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [AccidentController],
+      controllers: [ContactController],
       providers: [
         {
-          provide: AccidentsService,
+          provide: ContactService,
           useValue: {
             create: jest.fn(),
           },
@@ -28,8 +28,8 @@ describe('AccidentController', () => {
       ],
     }).compile();
 
-    controller = module.get<AccidentController>(AccidentController);
-    accidentsService = module.get<AccidentsService>(AccidentsService);
+    controller = module.get<ContactController>(ContactController);
+    contactService = module.get<ContactService>(ContactService);
     loggerService = module.get<LoggerService>(LoggerService);
   });
 
@@ -40,18 +40,21 @@ describe('AccidentController', () => {
   describe('registerAccident', () => {
     it('should call create method of accidentsService and log the action', () => {
       const file = {} as Express.Multer.File;
-      const registerAccidentDto: RegisterAccidentDto = {
-        date: '2022-12-31T14:30:00.000Z',
-        location: 'Sample Location',
-        details: 'Sample Details',
+      const registerAccidentDto: RegisterContactDto = {
+        name: '',
+        email: '',
+        phoneNumber: '',
+        city: '',
+        services: '',
+        notes: ''
       };
       
       const user = { sub: 'f560fb7f-0942-4ec3-b292-1a4b0bdf0958' };
 
-      controller.registerAccident(file, registerAccidentDto, { user });
+      controller.registerAccident(registerAccidentDto);
 
-      expect(accidentsService.create).toHaveBeenCalledWith(registerAccidentDto, user.sub, file);
-      expect(loggerService.log).toHaveBeenCalledWith('Accident Created', 'AccidentController');
+      expect(contactService.create).toHaveBeenCalledWith(registerAccidentDto, user.sub, file);
+      expect(loggerService.log).toHaveBeenCalledWith('Contact Created', 'RegisterContactDto');
     });
   });
 });
