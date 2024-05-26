@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ContactModule } from './accidents/contact.module';
+import { ContactModule } from './contacts/contact.module';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from './logger/logger.module';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
@@ -20,7 +20,7 @@ import { SuccessFilter } from './logger/error/200';
       port: 5432,
       database: process.env.POSTGRES_DB,
       username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
+      password: '0513',
       autoLoadEntities: true,
       synchronize: true,
       // ssl: true, // Enable only for production database connection

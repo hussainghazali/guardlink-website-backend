@@ -12,9 +12,9 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { LoggerService } from "src/logger/logger.service";
 import getDictionary from "lang/getDictionary";
 
-@ApiTags("accidents")
+@ApiTags("contact")
 // @ApiBearerAuth()
-@Controller("accidents")
+@Controller("contacts")
 export class ContactController {
   constructor(
     private readonly accidentsService: ContactService,
