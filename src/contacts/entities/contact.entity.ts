@@ -4,9 +4,6 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
-  OneToOne,
 } from 'typeorm';
 
 @Entity('contacts')

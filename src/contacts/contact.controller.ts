@@ -4,6 +4,7 @@ import {
   Body,
   BadRequestException,
   HttpStatus,
+  Get,
 } from "@nestjs/common";
 import { ContactService } from "./contact.service";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
@@ -40,4 +41,19 @@ export class ContactController {
       });
     }
   }  
+
+  @Get()
+  async getAllContacts() {
+    try {
+      const allUsers = await this.accidentsService.getAllServices();
+      if (!allUsers) {
+        return { message: "No Service found", statusCode: HttpStatus.NOT_FOUND };
+      }
+      this.logger.log('Service Fetched', 'ServiceController');
+      return { ...allUsers, statusCode: HttpStatus.OK };
+    } catch (error) {
+      this.logger.error('Failed to fetch service', error.stack, 'ServiceController');
+      throw { statusCode: HttpStatus.INTERNAL_SERVER_ERROR, message: 'Failed to fetch service' };
+    }
+  }
 }

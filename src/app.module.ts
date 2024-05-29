@@ -11,6 +11,9 @@ import { BadRequestFilter } from './logger/error/400';
 import { CreatedInterceptor } from './logger/error/201';
 import { ServerErrorFilter } from './logger/error/500';
 import { SuccessFilter } from './logger/error/200';
+import { ServiceModule } from './services/services.module';
+import { BlogModule } from './blog/blog.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -34,7 +37,10 @@ import { SuccessFilter } from './logger/error/200';
       isGlobal: true, // no need to import into other modules
     }),
     ContactModule,
+    ServiceModule,
+    BlogModule,
     LoggerModule,
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [
